@@ -1,0 +1,38 @@
+package com.example.rockcalendar;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+
+public class RockActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        HttpTransport httpTransport = new NetHttpTransport();
+        JacksonFactory jsonFactory = new JacksonFactory();
+
+        // The clientId and clientSecret are copied from the API Access tab on
+        // the Google APIs Console
+        String clientId = "YOUR_CLIENT_ID";
+        String clientSecret = "YOUR_CLIENT_SECRET";
+
+        // Or your redirect URL for web based applications.
+        String redirectUrl = "urn:ietf:wg:oauth:2.0:oob";
+        String scope = "https://www.googleapis.com/auth/calendar";
+
+        // Step 1: Authorize -->
+        String authorizationUrl = new GoogleAuthorizationRequestUrl(clientId, redirectUrl, scope)
+            .build();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.rock, menu);
+        return true;
+    }
+    
+}
